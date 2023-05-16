@@ -1,0 +1,91 @@
+<main id="main" class="main">
+    <h1>Farmers</h1><br>
+    <section class="section dashboard">
+        <form [formGroup]="formdata" (ngSubmit)="Save(formdata.value)">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label class="form-label">Enter Farmer Name*</label><br>
+                    <input type="text" formControlName="name" class="form-control">
+                    <span *ngIf="formdata.controls.name.touched && formdata.controls.name.invalid" class="text-danger">Please Enter Your Name</span><br>
+                </div>
+                <div class="col-lg-4">
+                    <label class="form-label">Enter Farmer Address*</label><br>
+                    <input type="text" formControlName="address" class="form-control">
+                    <span *ngIf="formdata.controls.address.touched && formdata.controls.address.invalid" class="text-danger">Please Enter Address</span><br>
+                </div>
+                <div class="col-lg-4">
+                    <label class="form-label">Enter Farmer Mobileno*</label><br>
+                    <input type="text" formControlName="mobileno" class="form-control">
+                    <span *ngIf="formdata.controls.mobileno.touched && formdata.controls.mobileno.invalid" class="text-danger">Please Enter Mobileno</span><br>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="form-label">Enter Farmer Email Address</label><br>
+                    <input type="email" formControlName="email" class="form-control">
+                </div> 
+                <div class="col-lg-6">
+                    <label class="form-label">Enter Farmer Town*</label><br>
+                     <select class="form-select" formControlName="townid">
+                         <option value=0>Town</option>
+                         <option *ngFor="let town of towns;" value={{town.id}}>{{town.name}}</option>
+                     </select>
+                     <span class="text-danger" *ngIf="formdata.controls.townid.touched && formdata.controls.townid.invalid">Please Select Your Town</span>
+                </div> 
+            </div>
+                   
+            <input type="submit" [disabled]="!formdata.valid" value="Save" class="btn btn-success mt-3">
+            <input type="reset" [disabled]="!formdata.valid" value="Clear" class="btn btn-info mt-3 mx-2" (click)="clear()"><br><br>
+        </form>
+        <div class="row">
+            <!-- Left side columns -->
+
+            <div class="row">
+                <!-- Top Selling -->
+                <div class="col-12">
+                    <div class="card top-selling overflow-auto">
+                        <div class="pb-0">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Actions</th>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Mobileno</th>
+                                        <th>Email Address</th>
+                                        <th>Recommendations</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let farmer of farmers; let i = index">
+                                        <td class="w-25">
+                                            <button type="button" class="btn btn-outline-success btn-sm text-capitalize" (click)="edit(farmer.id)">Edit</button>
+                                            <button type="button" class="btn btn-outline-danger btn-sm mx-2 text-capitalize" (click)="delete(farmer.id)">delete</button>
+                                        </td>
+                                        <td>{{i + 1}}</td>
+                                        <td>{{farmer.name}}</td>
+                                        <td>{{farmer.address}}</td>
+                                        <td>{{farmer.mobileno}}</td>
+                                        <td>{{farmer.email}}</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" routerLink="/admin/recommendations/{{farmer.id}}"><i class="bi bi-envelope mx-1"></i>Recommendations </button>
+                                        </td>
+                                    </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Top Selling -->
+
+            </div>
+            <!-- End Left side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+

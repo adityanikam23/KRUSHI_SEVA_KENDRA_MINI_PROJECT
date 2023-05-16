@@ -1,0 +1,50 @@
+<main id="main" class="main">
+    <h2>Crops</h2><br>
+    <section class="section dashboard">
+        <form [formGroup]="formdata" (ngSubmit)="Save(formdata.value)">   
+                    <label class="form-label">Enter Name*</label><br>
+                    <input type="text" formControlName="name" class="form-control">
+                    <span *ngIf="formdata.controls.name.touched && formdata.controls.name.invalid" class="text-danger">Please Enter Crop Name</span><br>
+            <input type="submit" [disabled]="!formdata.valid" value="Save" class="btn btn-success mt-1">
+            <input type="reset" [disabled]="!formdata.valid" value="Clear" class="btn btn-info mx-2 mt-1" (click)="clear()"><br><br>
+        </form>
+        <div class="row">
+            <!-- Left side columns -->
+
+            <div class="row">
+                <!-- Top Selling -->
+                <div class="col-12">
+                    <div class="card top-selling overflow-auto">
+                        <div class="pb-0">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Actions</th>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let crop of crops; let i = index">
+                                        <td class="w-25">
+                                            <button type="button" class="btn btn-outline-success btn-sm text-capitalize" (click)="edit(crop.id)">Edit</button>
+                                            <button type="button" class="btn btn-outline-danger btn-sm mx-2 text-capitalize" (click)="delete(crop.id)">delete</button>
+                                        </td>
+                                        <td>{{i + 1}}</td>
+                                        <td>{{crop.name}}</td>
+                                    </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Top Selling -->
+
+            </div>
+            <!-- End Left side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
